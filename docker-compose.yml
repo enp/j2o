@@ -1,0 +1,13 @@
+services:
+  jenkins:
+    container_name: jenkins
+    network_mode: host
+    build: config/jenkins
+    environment:
+      CASC_JENKINS_CONFIG: /var/jenkins_home/jcasc
+      JAVA_OPTS: >-
+        -Djenkins.install.runSetupWizard=false
+        -Dhudson.model.UsageStatistics.disabled=true
+    volumes:
+      - ./config/jenkins:/var/jenkins_home/config:ro
+      - ./config/jenkins/jenkins.yml:/var/jenkins_home/jcasc/jenkins.yml:ro

@@ -1,0 +1,24 @@
+NAME = 'example'
+DSL = """pipeline {
+  agent any
+  stages {
+    stage('one') {
+      steps {
+        echo 'HELLO ONE'
+      }
+    }
+    stage('two') {
+      steps {
+        echo 'HELLO TWO'
+      }
+    }
+  }
+}"""
+
+pipelineJob(NAME) {
+  definition {
+    cps {
+      script(DSL.stripIndent())
+    }
+  }
+}
