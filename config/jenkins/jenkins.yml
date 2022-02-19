@@ -1,2 +1,7 @@
 jobs:
   - file: "/var/jenkins_home/config/example.job"
+unclassified:
+  openTelemetry:
+    authentication: "noAuthentication"
+    endpoint: "http://localhost:55680"
+    exportOtelConfigurationAsEnvironmentVariables: true

@@ -11,3 +11,11 @@ services:
     volumes:
       - ./config/jenkins:/var/jenkins_home/config:ro
       - ./config/jenkins/jenkins.yml:/var/jenkins_home/jcasc/jenkins.yml:ro
+  otel-collector:
+    container_name: otel-collector
+    network_mode: host
+    image: otel/opentelemetry-collector:0.24.0
+    command: ["--config=/etc/otel-collector-config.yml"]
+    volumes:
+      - ./config/otel-collector/otel-collector-config.yml:/etc/otel-collector-config.yml
+      - ./data/otel-collector:/data/otel-collector

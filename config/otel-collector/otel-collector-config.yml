@@ -1,0 +1,22 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:55680
+
+exporters:
+  logging:
+  file:
+    path: /data/otel-collector/otel.json
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [logging,file]
+    metrics:
+      receivers: [otlp]
+      exporters: [logging,file]
+    logs:
+      receivers: [otlp]
+      exporters: [logging,file]

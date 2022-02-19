@@ -1,3 +1,5 @@
 configuration-as-code
 blueocean
 job-dsl
+opentelemetry
+cloudbees-disk-usage-simple
