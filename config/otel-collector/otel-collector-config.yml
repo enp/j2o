@@ -8,6 +8,8 @@ exporters:
   logging:
   file:
     path: /data/otel-collector/otel.json
+  prometheus:
+    endpoint: 0.0.0.0:8889
 
 service:
   pipelines:
@@ -16,7 +18,7 @@ service:
       exporters: [logging,file]
     metrics:
       receivers: [otlp]
-      exporters: [logging,file]
+      exporters: [logging,file,prometheus]
     logs:
       receivers: [otlp]
       exporters: [logging,file]

@@ -19,3 +19,9 @@ services:
     volumes:
       - ./config/otel-collector/otel-collector-config.yml:/etc/otel-collector-config.yml
       - ./data/otel-collector:/data/otel-collector
+  prometheus:
+    container_name: prometheus
+    network_mode: host
+    image: prom/prometheus:latest
+    volumes:
+      - ./config/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
