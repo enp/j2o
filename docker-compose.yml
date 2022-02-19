@@ -25,3 +25,25 @@ services:
     image: prom/prometheus:latest
     volumes:
       - ./config/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+  data-prepper:
+    restart: unless-stopped
+    container_name: data-prepper
+    network_mode: host
+    image: opensearchproject/data-prepper:latest
+    volumes:
+      - ./config/data-prepper/pipelines.yaml:/usr/share/data-prepper/pipelines.yaml
+      - ./config/data-prepper/data-prepper-config.yaml:/usr/share/data-prepper/data-prepper-config.yaml
+  opensearch:
+    container_name: opensearch
+    network_mode: host
+    image: opensearchproject/opensearch:latest
+    environment:
+      - "discovery.type=single-node"
+      - "DISABLE_SECURITY_PLUGIN=true"
+  opensearch-dashboards:
+    container_name: opensearch-dashboards
+    network_mode: host
+    image: opensearchproject/opensearch-dashboards:latest
+    environment:
+      - "OPENSEARCH_HOSTS=http://localhost:9200"
+      - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true" 

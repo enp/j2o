@@ -10,12 +10,15 @@ exporters:
     path: /data/otel-collector/otel.json
   prometheus:
     endpoint: 0.0.0.0:8889
+  otlp/2:
+    endpoint: localhost:21890
+    insecure: true
 
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [logging,file]
+      exporters: [logging,file,otlp/2]
     metrics:
       receivers: [otlp]
       exporters: [logging,file,prometheus]

@@ -1,0 +1,29 @@
+entry-pipeline:
+  source:
+    otel_trace_source:
+      ssl: false
+  sink:
+    - pipeline:
+        name: "raw-pipeline"
+    - pipeline:
+        name: "service-map-pipeline"
+raw-pipeline:
+  source:
+    pipeline:
+      name: "entry-pipeline"
+  prepper:
+    - otel_trace_raw_prepper:
+  sink:
+    - opensearch:
+        hosts: [ "http://localhost:9200" ]
+        trace_analytics_raw: true
+service-map-pipeline:
+  source:
+    pipeline:
+      name: "entry-pipeline"
+  prepper:
+    - service_map_stateful:
+  sink:
+    - opensearch:
+        hosts: [ "http://localhost:9200" ]
+        trace_analytics_service_map: true
