@@ -47,3 +47,19 @@ services:
     environment:
       - "OPENSEARCH_HOSTS=http://localhost:9200"
       - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true" 
+  jaeger-collector:
+    restart: unless-stopped
+    container_name: jaeger-collector
+    network_mode: host
+    image: jaegertracing/jaeger-collector
+    environment:
+      - "SPAN_STORAGE_TYPE=elasticsearch"
+      - "ES_SERVER_URLS=http://localhost:9200"
+  jaeger-query:
+    restart: unless-stopped
+    container_name: jaeger-query
+    network_mode: host
+    image: jaegertracing/jaeger-query
+    environment:
+      - "SPAN_STORAGE_TYPE=elasticsearch"
+      - "ES_SERVER_URLS=http://localhost:9200"

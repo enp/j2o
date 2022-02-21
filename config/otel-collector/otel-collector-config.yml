@@ -13,12 +13,16 @@ exporters:
   otlp/2:
     endpoint: localhost:21890
     insecure: true
+  jaeger:
+    endpoint: localhost:14250
+    insecure: true
+
 
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [logging,file,otlp/2]
+      exporters: [logging,file,otlp/2,jaeger]
     metrics:
       receivers: [otlp]
       exporters: [logging,file,prometheus]

@@ -5,3 +5,7 @@ unclassified:
     authentication: "noAuthentication"
     endpoint: "http://localhost:55680"
     exportOtelConfigurationAsEnvironmentVariables: true
+    observabilityBackends:
+      - jaeger:
+          jaegerBaseUrl: "http://localhost:16686"
+          name: "Jaeger"
